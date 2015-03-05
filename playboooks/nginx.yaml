@@ -2,7 +2,7 @@
 - hosts: webservers
   sudo: yes
   vars:
-   http_port: 8183
+   http_port: 8080
   tasks:
   - name: download the EPEL repository definitions
     get_url: url=http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm dest=/tmp/epel.rpm
@@ -13,7 +13,7 @@
   - name: ensure nginx is installed
     yum: name=nginx state=installed
 
-  - name: modify the default config to use port {{ http_port }}
+  - name: modify the default config to use the given http port
     template: src=default.conf.j2 dest=/etc/nginx/conf.d/default.conf
     notify: 
     - restart nginx

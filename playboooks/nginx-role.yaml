@@ -1,0 +1,10 @@
+---
+- hosts: webservers
+  sudo: yes
+
+  vars:
+   http_port: 8183
+
+  roles:
+  - nginx
+

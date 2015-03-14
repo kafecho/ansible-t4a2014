@@ -1,0 +1,12 @@
+upstream myapp1 {
+	{% for host in groups['webservers'] %}
+	server {{ host }}:{{ http_port }};
+	{% endfor %}
+}
+
+server {
+	listen {{ load_balancer_port}};
+        location / {
+            proxy_pass http://myapp1;
+        }
+}
